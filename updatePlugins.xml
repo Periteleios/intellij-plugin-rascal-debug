@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+  <plugin id="com.periteleios.rascal-terminal"
+          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.1.0/rascal-terminal-plugin-0.1.0.zip"
+          version="0.1.0">
+    <idea-version since-build="242"/>
+    <name>Rascal Terminal Commands</name>
+    <description><![CDATA[
+      Implements the rascalmpl.importModule / rascalmpl.runMain LSP commands
+      -- the CodeLenses Rascal's LSP server emits above module and main()
+      declarations -- for LSP4IJ, matching what the official VS Code
+      extension does. Also auto-discovers the Rascal debug port on run and
+      attaches LSP4IJ's DAP configuration automatically, no manual port
+      lookup or config editing needed.
+    ]]></description>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+    <depends>com.redhat.devtools.lsp4ij</depends>
+  </plugin>
+</plugins>
