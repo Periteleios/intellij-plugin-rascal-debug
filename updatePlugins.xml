@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.1.0/rascal-terminal-plugin-0.1.0.zip"
-          version="0.1.0">
+          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.2.0/rascal-terminal-plugin-0.2.0.zip"
+          version="0.2.0">
     <idea-version since-build="242"/>
     <name>Rascal Terminal Commands</name>
     <description><![CDATA[
@@ -11,8 +11,19 @@
       declarations -- for LSP4IJ, matching what the official VS Code
       extension does. Also auto-discovers the Rascal debug port on run and
       attaches LSP4IJ's DAP configuration automatically, no manual port
-      lookup or config editing needed.
+      lookup or config editing needed. Also bridges Rascal's std:///
+      location scheme to IntelliJ's VFS, so "Go to Definition" into
+      standard library symbols (IO, List, Set, String, util::FileSystem,
+      etc.) works instead of silently failing.
     ]]></description>
+    <change-notes><![CDATA[
+      <b>0.2.0</b>
+      <ul>
+        <li>Fixed "Go to Definition" into Rascal standard library symbols
+        (e.g. IO::println, List::size) by bridging the std:/// location
+        scheme to IntelliJ's VFS.</li>
+      </ul>
+    ]]></change-notes>
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
     <depends>com.redhat.devtools.lsp4ij</depends>
