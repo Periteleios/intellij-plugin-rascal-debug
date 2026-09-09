@@ -8,8 +8,7 @@
     <description><![CDATA[
       Implements the rascalmpl.importModule / rascalmpl.runMain LSP commands
       -- the CodeLenses Rascal's LSP server emits above module and main()
-      declarations -- for LSP4IJ, matching what the official VS Code
-      extension does. Also auto-discovers the Rascal debug port on run and
+      declarations -- for LSP4IJ. Also auto-discovers the Rascal debug port on run and
       attaches LSP4IJ's DAP configuration automatically, no manual port
       lookup or config editing needed. Also bridges Rascal's std:///
       location scheme to IntelliJ's VFS, so "Go to Definition" into
