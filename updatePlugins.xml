@@ -6,6 +6,13 @@
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>
     <description><![CDATA[
+      Requires adept-base checked out -- this plugin drives a Rascal REPL
+      and debug session against that project's own build, and does nothing
+      standalone. It does NOT provide Rascal syntax highlighting or
+      editing (diagnostics/completion/CodeLenses) by itself -- see
+      adept-base's tools/intellij/README.md for those two separate,
+      required one-time setup steps before installing this.
+      <br/><br/>
       Implements the rascalmpl.importModule / rascalmpl.runMain LSP commands
       -- the CodeLenses Rascal's LSP server emits above module and main()
       declarations -- for LSP4IJ. Also auto-discovers the Rascal debug port on run and
