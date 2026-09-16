@@ -16,11 +16,31 @@ compiled classes, and does nothing standalone. It also does **not** give
 you Rascal syntax highlighting, error diagnostics, or completion by itself
 -- those are two separate one-time setup steps. Installing just this plugin
 without doing those first will look broken (plain uncolored `.rsc`/`.ptl`
-files, no CodeLenses). Full setup, in order, is documented in
-`adept-base`'s own `tools/intellij/README.md`:
+files, no CodeLenses). Full setup, in order (all from an `adept-base`
+checkout; full detail in that project's own `tools/intellij/README.md`):
 
-0. Syntax highlighting (TextMate bundle install script).
-1. LSP4IJ + the `.rsc`/`.ptl` language server launcher scripts (editing).
+0. **Syntax highlighting** -- otherwise `.rsc`/`.ptl` render as plain,
+   uncolored text. One-time, idempotent script (auto-detects your IntelliJ
+   profile dir, or pass one explicitly):
+   ```bash
+   tools/intellij/setup-intellij-rascal-highlighting.sh
+   ```
+   Restart IntelliJ, then verify: Settings > Editor > TextMate Bundles
+   should list `rascal-basic` enabled.
+
+1. **Editing** (diagnostics, hover, completion, CodeLenses) -- install
+   [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij) from the
+   Marketplace, then wire up `adept-base`'s own launcher scripts as two
+   Language Servers (Settings > Languages & Frameworks > Language
+   Servers > **+**, once per file type):
+   ```bash
+   chmod +x tools/intellij/run-rsc-lsp.sh tools/intellij/run-ptl-lsp.sh
+   ```
+   | | `.rsc` server | `.ptl` server |
+   |---|---|---|
+   | Command | absolute path to `tools/intellij/run-rsc-lsp.sh` | absolute path to `tools/intellij/run-ptl-lsp.sh` |
+   | Mappings | `*.rsc` | `*.ptl` |
+
 2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- the
    only piece this repo hosts.
 
