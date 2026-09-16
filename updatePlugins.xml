@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.2.0/rascal-terminal-plugin-0.2.0.zip"
-          version="0.2.0">
+          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.5.0/rascal-debugger-0.5.0.zip"
+          version="0.5.0">
     <idea-version since-build="242"/>
-    <name>Rascal Terminal Commands</name>
+    <name>Rascal Debugger</name>
     <description><![CDATA[
       Implements the rascalmpl.importModule / rascalmpl.runMain LSP commands
       -- the CodeLenses Rascal's LSP server emits above module and main()
@@ -13,9 +13,27 @@
       lookup or config editing needed. Also bridges Rascal's std:///
       location scheme to IntelliJ's VFS, so "Go to Definition" into
       standard library symbols (IO, List, Set, String, util::FileSystem,
-      etc.) works instead of silently failing.
+      etc.) works instead of silently failing. Registers a "Rascal Debugger"
+      DAP server that fixes a per-file breakpoint sync bug in LSP4IJ 0.21.0's
+      stock DAP breakpoint handler (disabling one breakpoint while another
+      was active elsewhere in the project never stopped the debugger from
+      breaking at the disabled one).
     ]]></description>
     <change-notes><![CDATA[
+      <b>0.5.0</b>
+      <ul>
+        <li>Renamed to "Rascal Debugger".</li>
+        <li>Fixed a real LSP4IJ 0.21.0 bug where disabling/removing a
+        breakpoint while another was active anywhere else in the project
+        never notified the debug adapter, so execution kept stopping at
+        the disabled breakpoint. Requires selecting "Rascal Debugger" (not
+        the generic entry) in your DAP run configuration's server
+        dropdown -- see this project's README.</li>
+        <li>Classpath computation is now derived dynamically from Maven
+        instead of hardcoded jar paths, fixing a NoClassDefFoundError on
+        "Run/Import in new Rascal terminal" when the hardcoded paths were
+        stale.</li>
+      </ul>
       <b>0.2.0</b>
       <ul>
         <li>Fixed "Go to Definition" into Rascal standard library symbols
