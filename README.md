@@ -60,10 +60,11 @@ order:
    (2.22.4) and emit real JSON-RPC LSP messages when run this way, from
    this repo's own checkout, pointed at a separate `adept-base` checkout.
 
-2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- same
-   deal as part 1: the plugin binary is what this repo hosts (below), but
-   it still needs an `adept-base` checkout to drive a Rascal REPL/DAP
-   session against that project's own compiled classes.
+2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- unlike
+   part 1, this one is fully self-contained: "Import"/"Run in new Rascal
+   terminal" computes its classpath from whatever project is currently
+   open in IntelliJ, via that project's own `pom.xml`. Works against any
+   Maven-based Rascal project, `adept-base` included but not required.
 
 All three parts are documented in full, alongside the rest of the
 `adept-base` IDE setup, in that project's own `tools/intellij/README.md`.

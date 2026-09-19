@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.5.0/rascal-debugger-0.5.0.zip"
-          version="0.5.0">
+          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.6.0/rascal-debugger-0.6.0.zip"
+          version="0.6.0">
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>
     <description><![CDATA[
-      Requires adept-base checked out -- this plugin drives a Rascal REPL
-      and debug session against that project's own build, and does nothing
-      standalone. It does NOT provide Rascal syntax highlighting or
-      editing (diagnostics/completion/CodeLenses) by itself -- see
-      adept-base's tools/intellij/README.md for those two separate,
+      Works with any Maven-based Rascal project. Does NOT provide Rascal
+      syntax highlighting or editing (diagnostics/completion/CodeLenses) by
+      itself -- see this repo's own README for those two separate,
       required one-time setup steps before installing this.
       <br/><br/>
       Implements the rascalmpl.importModule / rascalmpl.runMain LSP commands
@@ -27,6 +25,17 @@
       breaking at the disabled one).
     ]]></description>
     <change-notes><![CDATA[
+      <b>0.6.0</b>
+      <ul>
+        <li>Works with any Maven-based Rascal project now: "Import"/"Run
+        in new Rascal terminal" computes its classpath from whatever
+        project is open, via that project's own pom.xml, instead of
+        requiring a specific script to exist inside it.</li>
+        <li>run-rsc-lsp.sh/run-ptl-lsp.sh/compute-classpath.sh (also hosted
+        in this repo) support an ADEPT_BASE_ROOT override, so a copy can
+        run pointed at a project checkout other than the one it physically
+        lives in.</li>
+      </ul>
       <b>0.5.0</b>
       <ul>
         <li>Renamed to "Rascal Debugger".</li>
