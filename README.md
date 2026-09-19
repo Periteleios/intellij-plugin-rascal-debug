@@ -34,19 +34,26 @@ order:
    [docs/intellij_rascal_highlighting.md](docs/intellij_rascal_highlighting.md)
    for why the grammar needed patching.
 
-1. **Editing** (diagnostics, hover, completion, CodeLenses) -- **this step
-   does need an `adept-base` checkout**, since the language servers run
-   against that project's own compiled classes. Install
+1. **Editing** (diagnostics, hover, completion, CodeLenses) -- **unlike
+   part 0, these scripts are NOT in this repo and can't be**: they resolve
+   their own project root and require `adept-base`'s actual `pom.xml` +
+   compiled `target/classes` to exist there, then shell out to `mvn
+   dependency:build-classpath` against that real Maven project to launch
+   the actual language server jar. They only mean something run in place
+   inside a real `adept-base` checkout -- copying just the script text
+   elsewhere gives you a script that errors out the instant it runs (no
+   POM found). So: in your `adept-base` checkout (not this repo), install
    [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij) from the
    Marketplace, then wire up `adept-base`'s own launcher scripts as two
    Language Servers (Settings > Languages & Frameworks > Language
    Servers > **+**, once per file type):
    ```bash
+   # in your adept-base checkout
    chmod +x tools/intellij/run-rsc-lsp.sh tools/intellij/run-ptl-lsp.sh
    ```
    | | `.rsc` server | `.ptl` server |
    |---|---|---|
-   | Command | absolute path to `tools/intellij/run-rsc-lsp.sh` | absolute path to `tools/intellij/run-ptl-lsp.sh` |
+   | Command | absolute path to `<adept-base>/tools/intellij/run-rsc-lsp.sh` | absolute path to `<adept-base>/tools/intellij/run-ptl-lsp.sh` |
    | Mappings | `*.rsc` | `*.ptl` |
 
 2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- also
