@@ -38,12 +38,16 @@ order:
    directly in this repo (`tools/intellij/run-rsc-lsp.sh`, `run-ptl-lsp.sh`,
    `compute-classpath.sh`), but unlike part 0's grammar, these scripts
    genuinely can't run standalone: they launch the actual language server
-   jar against an actual Maven-built project, so **you still need an
-   `adept-base` checkout on disk somewhere** -- these scripts just no
-   longer have to physically live inside it. Point them at yours by
+   jar against an actual Maven-built Rascal project, so **you still need
+   one such checkout on disk somewhere** -- same requirement as part 2
+   below, and just as generic: it does not have to be `adept-base`, any
+   Maven-based Rascal project works. These scripts just no longer have to
+   physically live inside whichever one you point them at. Do that by
    setting `ADEPT_BASE_ROOT` to its absolute path (in each Language
    Server's **Environment variables** field in IntelliJ, not the Command
-   field). Install [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij)
+   field) -- the name is historical, from when this only ever worked
+   against `adept-base`; the variable itself works with any project.
+   Install [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij)
    from the Marketplace, then wire up these scripts as two Language
    Servers (Settings > Languages & Frameworks > Language Servers > **+**,
    once per file type):
@@ -54,17 +58,18 @@ order:
    |---|---|---|
    | Command | absolute path to `tools/intellij/run-rsc-lsp.sh` (in this checkout) | absolute path to `tools/intellij/run-ptl-lsp.sh` (in this checkout) |
    | Mappings | `*.rsc` | `*.ptl` |
-   | Environment variables | `ADEPT_BASE_ROOT=/absolute/path/to/your/adept-base` | `ADEPT_BASE_ROOT=/absolute/path/to/your/adept-base` |
+   | Environment variables | `ADEPT_BASE_ROOT=/absolute/path/to/a/rascal/project` | `ADEPT_BASE_ROOT=/absolute/path/to/a/rascal/project` |
 
    Verified live: both scripts start the real Rascal Language Server
    (2.22.4) and emit real JSON-RPC LSP messages when run this way, from
-   this repo's own checkout, pointed at a separate `adept-base` checkout.
+   this repo's own checkout, pointed at a separate project checkout.
 
-2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- unlike
-   part 1, this one is fully self-contained: "Import"/"Run in new Rascal
-   terminal" computes its classpath from whatever project is currently
-   open in IntelliJ, via that project's own `pom.xml`. Works against any
-   Maven-based Rascal project, `adept-base` included but not required.
+2. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- same
+   deal as part 1, just built in rather than an env var: "Import"/"Run in
+   new Rascal terminal" computes its classpath from whatever project is
+   currently open in IntelliJ, via that project's own `pom.xml`. Works
+   against any Maven-based Rascal project, `adept-base` included but not
+   required.
 
 All three parts are documented in full, alongside the rest of the
 `adept-base` IDE setup, in that project's own `tools/intellij/README.md`.
