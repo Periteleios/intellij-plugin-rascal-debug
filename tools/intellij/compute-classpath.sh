@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026, Periteleios
+# All rights reserved. This file is licensed under the BSD 2-Clause
+# License -- see the LICENSE file in this directory.
+#
 # Computes (and caches) this project's full Maven-resolved dependency
 # classpath, for tools/intellij/run-rsc-lsp.sh, run-ptl-lsp.sh, and the
 # rascal-terminal-plugin's "Run/Import in new Rascal terminal" action to

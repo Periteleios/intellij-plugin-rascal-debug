@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Copyright (c) 2026, Periteleios
+# All rights reserved. This file is licensed under the BSD 2-Clause
+# License -- see the LICENSE file in this directory.
+#
 # Launches Rascal's ParametricLanguageServer registered for PTL (.ptl) files,
 # over stdio, for use as an LSP4IJ "Language Server" definition in IntelliJ.
 #

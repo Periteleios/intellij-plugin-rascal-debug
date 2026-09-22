@@ -1,4 +1,8 @@
 #!/bin/bash
+# Copyright (c) 2026, Periteleios
+# All rights reserved. This file is licensed under the BSD 2-Clause
+# License -- see the LICENSE file in this directory.
+
 set -euo pipefail
 
 # SUMMARY:
