@@ -41,7 +41,7 @@ breakpoints/stepping should all just work.
    `tools/intellij/rascal-debugger-plugin/build.gradle.kts`, then build:
    ```bash
    cd tools/intellij/rascal-debugger-plugin
-   export JAVA_HOME=~/.jdks/openjdk-26.0.2.1   # any JDK 17+
+   export JAVA_HOME=~/.jdks/openjdk-26.0.2.1   # needs JDK 25+ (platform 2026.2.2's own jars are class v69); output still targets 17
    ./gradlew buildPlugin
    ```
    Output: `build/distributions/rascal-debugger-<version>.zip`.
