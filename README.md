@@ -10,11 +10,36 @@ a static `updatePlugins.xml` + release assets to auto-update from, not a
 source checkout -- so releases are cut here even though the source is
 public.
 
-**This plugin alone does not give you Rascal syntax highlighting, error
-diagnostics, or completion** -- those are two separate one-time setup
-steps. Installing just this plugin without doing those first will look
-broken (plain uncolored `.rsc` files, no CodeLenses). Full setup, in
-order:
+**As of 0.1.0, installing the plugin is all you need to do** -- it
+auto-configures syntax highlighting, editing, and debugging on its own,
+against whatever Maven-based Rascal project is currently open. The
+scripts and grammar hosted in this repo (below) are what it used to
+require doing by hand, in three separate one-time steps; they still work,
+but only as an advanced/manual fallback now -- see "Advanced / manual
+setup" below.
+
+## Installing (one-time, per developer)
+
+Settings/Preferences > Plugins > gear icon (⚙) > **Manage Plugin
+Repositories...** > **+** > add:
+
+```
+https://raw.githubusercontent.com/Periteleios/rascal-intellij-debugger-releases/main/updatePlugins.xml
+```
+
+Apply, then find **Rascal Debugger** under Marketplace (it'll show up as
+coming from this custom repository) and install it. Future updates pushed
+here will show up as normal plugin updates -- no manual reinstall needed.
+Open any `.rsc` file and syntax highlighting, diagnostics/CodeLenses, and
+breakpoints/stepping should all just work.
+
+## Advanced / manual setup
+
+Everything below is what the plugin now does for you automatically (see
+[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger)'s
+own `tools/intellij/README.md` for exactly how). Use this instead if you
+want highlighting/editing without installing the plugin at all, or want
+to understand exactly what the automatic setup is doing.
 
 1. **Syntax highlighting** -- otherwise `.rsc` renders as plain,
    uncolored text. This repo hosts the actual TextMate bundle + setup
@@ -38,7 +63,7 @@ order:
    directly in this repo (`run-rsc-lsp.sh`,
    `compute-classpath.sh`), but unlike part 1's grammar, this script
    genuinely can't run standalone: it launches the actual language server
-   jar against an actual Maven-built Rascal project, so **you still need
+   jar against an actual Maven-based Rascal project, so **you still need
    one such checkout on disk somewhere** -- same requirement as part 3
    below, and just as generic: any Maven-based Rascal project works. This
    script just no longer has to physically live inside whichever one you
@@ -67,28 +92,15 @@ order:
    deal as part 2, just built in rather than an env var: "Import"/"Run in
    new Rascal terminal" computes its classpath from whatever project is
    currently open in IntelliJ, via that project's own `pom.xml`. Works
-   against any Maven-based Rascal project.
+   against any Maven-based Rascal project. As of plugin 0.1.0 this DAP
+   Run/Debug configuration, including the exact `*.rsc -> rascal`
+   Mappings-tab entry that's easy to miss by hand, is created
+   automatically on project open -- see the source repo's own README for
+   the manual steps if you want to do this yourself instead.
 
 All three parts are documented in full in
 [rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger)'s
 own `tools/intellij/README.md`.
-
-## Installing (one-time, per developer)
-
-Settings/Preferences > Plugins > gear icon (⚙) > **Manage Plugin
-Repositories...** > **+** > add:
-
-```
-https://raw.githubusercontent.com/Periteleios/rascal-intellij-debugger-releases/main/updatePlugins.xml
-```
-
-Apply, then find **Rascal Debugger** under Marketplace (it'll show up as
-coming from this custom repository) and install it. Future updates pushed
-here will show up as normal plugin updates -- no manual reinstall needed.
-
-Then go do parts 1 and 2 above (both from this repo now) if you haven't
-already -- this plugin alone won't make `.rsc` files look or behave
-like source code.
 
 ## Cutting a new release (maintainers)
 
