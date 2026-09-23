@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.0/rascal-debugger-0.1.0.zip"
-          version="0.1.0">
+          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.1/rascal-debugger-0.1.1.zip"
+          version="0.1.1">
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>
     <description><![CDATA[
-      Works with any Maven-based Rascal project. Does NOT provide Rascal
-      syntax highlighting or editing (diagnostics/completion/CodeLenses) by
-      itself. <br>See this repo's own README for those two separate,
-      required one-time setup steps before installing this.
+      Works with any Maven-based Rascal project. Installing this plugin
+      is all you need to do: it auto-configures syntax highlighting,
+      editing (diagnostics/completion/CodeLenses), and debugging on its
+      own. <br>See this repo's own README for details.
       <br/>
     ]]></description>
     <change-notes><![CDATA[
+      <b>0.1.1</b>
+      <ul>
+        <li>Fixed the plugin's own build: it was silently compiled to
+        Java 25 bytecode regardless of declared compatibility, breaking
+        on any IDE whose own boot JDK was older (e.g. 21). Now correctly
+        targets Java 17.</li>
+        <li>Fixed the bundled TextMate grammar's module rule, which was
+        unreachable and, once reachable, gave real Rascal module bodies
+        no token boundaries.</li>
+        <li>Added macOS support for automatic debug-port discovery
+        (previously Linux-only).</li>
+      </ul>
       <b>0.1.0</b>
       <ul>
         <li>Initial release from the plugin's new standalone home
-        (rascal-intellij-debugger) -- works with any Maven-based Rascal
-        project.</li>
+        (rascal-intellij-debugger-development) -- works with any
+        Maven-based Rascal project.</li>
       </ul>
     ]]></change-notes>
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.terminal</depends>
+    <depends>org.jetbrains.plugins.textmate</depends>
     <depends>com.redhat.devtools.lsp4ij</depends>
   </plugin>
 </plugins>
