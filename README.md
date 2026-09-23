@@ -1,22 +1,23 @@
 # Rascal IntelliJ Debug Plugin -- releases
 
-This repo hosts **built releases only**. The plugin's source lives publicly
-in [Periteleios/rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger),
+This repo hosts **built releases only** -- just `updatePlugins.xml` and the
+release assets it points at. The plugin's source lives publicly in
+[Periteleios/rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger),
 under `tools/intellij/rascal-debugger-plugin/` -- see that project's
-`tools/intellij/README.md` for what it does and how it's built.
+`tools/intellij/README.md` for what it does and how it's built, and for
+its own manual/advanced setup path if you want highlighting/editing
+without installing the plugin at all.
 
 This repo exists because IntelliJ's custom plugin repository feature needs
 a static `updatePlugins.xml` + release assets to auto-update from, not a
 source checkout -- so releases are cut here even though the source is
 public.
 
-**As of 0.1.0, installing the plugin is all you need to do** -- it
+**Installing the plugin is all you need to do.** As of 0.1.0, it
 auto-configures syntax highlighting, editing, and debugging on its own,
-against whatever Maven-based Rascal project is currently open. The
-scripts and grammar hosted in this repo (below) are what it used to
-require doing by hand, in three separate one-time steps; they still work,
-but only as an advanced/manual fallback now -- see "Advanced / manual
-setup" below.
+against whatever Maven-based Rascal project is currently open -- no
+scripts to run, no manual Language Server or Run/Debug configuration to
+set up.
 
 ## Installing (one-time, per developer)
 
@@ -32,75 +33,6 @@ coming from this custom repository) and install it. Future updates pushed
 here will show up as normal plugin updates -- no manual reinstall needed.
 Open any `.rsc` file and syntax highlighting, diagnostics/CodeLenses, and
 breakpoints/stepping should all just work.
-
-## Advanced / manual setup
-
-Everything below is what the plugin now does for you automatically (see
-[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger)'s
-own `tools/intellij/README.md` for exactly how). Use this instead if you
-want highlighting/editing without installing the plugin at all, or want
-to understand exactly what the automatic setup is doing.
-
-1. **Syntax highlighting** -- otherwise `.rsc` renders as plain,
-   uncolored text. This repo hosts the actual TextMate bundle + setup
-   script directly (mirrored from `rascal-intellij-debugger`'s
-   `tools/intellij/rascal-textmate-bundle/`, kept in sync -- see "Keeping
-   the mirrored highlighting/editing files in sync" below) -- it's
-   generic Rascal grammar, not tied to any specific project, so **this one
-   step needs nothing else**. Clone this repo (or download it
-   as a zip from the green "Code" button above), then from that checkout,
-   one-time, idempotent (auto-detects your IntelliJ profile dir, or pass
-   one explicitly):
-   ```bash
-   ./setup-intellij-rascal-highlighting.sh
-   ```
-   Restart IntelliJ, then verify: Settings > Editor > TextMate Bundles
-   should list `rascal-basic` enabled. See
-   [docs/intellij_rascal_highlighting.md](docs/intellij_rascal_highlighting.md)
-   for why the grammar needed patching.
-
-2. **Editing** (diagnostics, hover, completion, CodeLenses) -- also hosted
-   directly in this repo (`run-rsc-lsp.sh`,
-   `compute-classpath.sh`), but unlike part 1's grammar, this script
-   genuinely can't run standalone: it launches the actual language server
-   jar against an actual Maven-based Rascal project, so **you still need
-   one such checkout on disk somewhere** -- same requirement as part 3
-   below, and just as generic: any Maven-based Rascal project works. This
-   script just no longer has to physically live inside whichever one you
-   point it at. Do that by setting `RASCAL_PROJECT_ROOT` to its absolute path
-   (in the Language Server's **Environment variables** field in IntelliJ,
-   not the Command field) -- the name is historical, from when this only
-   ever worked against a project called `adept-base`; the variable itself
-   works with any Maven-based Rascal project.
-   Install [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij)
-   from the Marketplace, then wire up this script as a Language
-   Server (Settings > Languages & Frameworks > Language Servers > **+**):
-   ```bash
-   chmod +x run-rsc-lsp.sh
-   ```
-   | | `.rsc` server |
-   |---|---|
-   | Command | absolute path to `run-rsc-lsp.sh` (in this checkout) |
-   | Mappings | `*.rsc` |
-   | Environment variables | `RASCAL_PROJECT_ROOT=/absolute/path/to/a/rascal/project` |
-
-   Verified live: this script starts the real Rascal Language Server
-   (2.22.4) and emits real JSON-RPC LSP messages when run this way, from
-   this repo's own checkout, pointed at a separate project checkout.
-
-3. **This plugin** + one LSP4IJ DAP run configuration (debugging) -- same
-   deal as part 2, just built in rather than an env var: "Import"/"Run in
-   new Rascal terminal" computes its classpath from whatever project is
-   currently open in IntelliJ, via that project's own `pom.xml`. Works
-   against any Maven-based Rascal project. As of plugin 0.1.0 this DAP
-   Run/Debug configuration, including the exact `*.rsc -> rascal`
-   Mappings-tab entry that's easy to miss by hand, is created
-   automatically on project open -- see the source repo's own README for
-   the manual steps if you want to do this yourself instead.
-
-All three parts are documented in full in
-[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger)'s
-own `tools/intellij/README.md`.
 
 ## Cutting a new release (maintainers)
 
@@ -128,34 +60,3 @@ own `tools/intellij/README.md`.
 
 That's it -- no separate "publish" step, `raw.githubusercontent.com` serves
 the updated file immediately once it's on `main`.
-
-### Keeping the mirrored highlighting/editing files in sync
-
-`rascal-textmate-bundle/`, `docs/intellij_rascal_highlighting.md`,
-`setup-intellij-rascal-highlighting.sh`, `run-rsc-lsp.sh`, and
-`compute-classpath.sh` -- all at this repo's own root -- are copies of the
-same content in
-[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger),
-where they live nested under `tools/intellij/` instead (that repo also
-holds the plugin's own Java source and a sample project alongside them,
-so the nesting earns its keep there; this repo holds nothing else, so it
-doesn't). Because the nesting depth differs, each script's own fallback
-path-resolution (used when `RASCAL_PROJECT_ROOT` is unset) is one
-directory level shallower here than in the source repo -- already
-accounted for in the copies here; don't overwrite them with a raw copy of
-the source repo's own versions without reapplying that. Whenever any of
-these files change in `rascal-intellij-debugger` (a grammar fix, a
-classpath change, a new `RASCAL_PROJECT_ROOT`-style option), re-apply the
-same content change here and push -- no version bump or release needed,
-this isn't tied to the plugin's own versioning:
-
-```bash
-# from a rascal-intellij-debugger checkout, SOURCE=/path/to/rascal-intellij-debugger
-cp -r "$SOURCE"/tools/intellij/rascal-textmate-bundle .
-cp "$SOURCE"/tools/intellij/docs/intellij_rascal_highlighting.md docs/
-cp "$SOURCE"/tools/intellij/setup-intellij-rascal-highlighting.sh .
-cp "$SOURCE"/tools/intellij/run-rsc-lsp.sh "$SOURCE"/tools/intellij/compute-classpath.sh .
-# then reapply the one-directory-shallower path fix noted above to the
-# three scripts just copied (see this repo's git history for the diff)
-git add -A && git commit -m "Sync highlighting/editing files from rascal-intellij-debugger" && git push origin main
-```
