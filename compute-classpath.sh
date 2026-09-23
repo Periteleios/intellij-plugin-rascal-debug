@@ -4,8 +4,8 @@
 # License -- see the LICENSE file in this directory.
 #
 # Computes (and caches) this project's full Maven-resolved dependency
-# classpath, for tools/intellij/run-rsc-lsp.sh and the rascal-terminal-
-# plugin's "Run/Import in new Rascal terminal" action to share.
+# classpath, for run-rsc-lsp.sh and the rascal-debugger-plugin's
+# "Run/Import in new Rascal terminal" action to share.
 #
 # Previously each of those two hand-maintained its own hardcoded jar list
 # (rascal/rascal-lsp/typepal, plus whatever else a project's own
@@ -21,7 +21,7 @@
 # not the project's own compiled output).
 #
 # Usage:
-#   tools/intellij/compute-classpath.sh
+#   ./compute-classpath.sh
 #
 # Caching: the computed classpath is cached in
 # target/rascal-ide-classpath.txt and reused as long as it's newer than
@@ -43,7 +43,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -n "${RASCAL_PROJECT_ROOT:-}" ]; then
   PROJECT_ROOT="$(cd "$RASCAL_PROJECT_ROOT" && pwd)"
 else
-  PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+  PROJECT_ROOT="$SCRIPT_DIR"
 fi
 POM="$PROJECT_ROOT/pom.xml"
 CACHE_FILE="$PROJECT_ROOT/target/rascal-ide-classpath.txt"

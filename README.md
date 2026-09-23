@@ -27,7 +27,7 @@ order:
    one-time, idempotent (auto-detects your IntelliJ profile dir, or pass
    one explicitly):
    ```bash
-   tools/intellij/setup-intellij-rascal-highlighting.sh
+   ./setup-intellij-rascal-highlighting.sh
    ```
    Restart IntelliJ, then verify: Settings > Editor > TextMate Bundles
    should list `rascal-basic` enabled. See
@@ -35,7 +35,7 @@ order:
    for why the grammar needed patching.
 
 2. **Editing** (diagnostics, hover, completion, CodeLenses) -- also hosted
-   directly in this repo (`tools/intellij/run-rsc-lsp.sh`,
+   directly in this repo (`run-rsc-lsp.sh`,
    `compute-classpath.sh`), but unlike part 1's grammar, this script
    genuinely can't run standalone: it launches the actual language server
    jar against an actual Maven-built Rascal project, so **you still need
@@ -51,11 +51,11 @@ order:
    from the Marketplace, then wire up this script as a Language
    Server (Settings > Languages & Frameworks > Language Servers > **+**):
    ```bash
-   chmod +x tools/intellij/run-rsc-lsp.sh
+   chmod +x run-rsc-lsp.sh
    ```
    | | `.rsc` server |
    |---|---|
-   | Command | absolute path to `tools/intellij/run-rsc-lsp.sh` (in this checkout) |
+   | Command | absolute path to `run-rsc-lsp.sh` (in this checkout) |
    | Mappings | `*.rsc` |
    | Environment variables | `RASCAL_PROJECT_ROOT=/absolute/path/to/a/rascal/project` |
 
@@ -119,27 +119,31 @@ the updated file immediately once it's on `main`.
 
 ### Keeping the mirrored highlighting/editing files in sync
 
-`scripts/intellij-rascal-bundle/`, `docs/intellij_rascal_highlighting.md`,
-and everything under `tools/intellij/` (`setup-intellij-rascal-
-highlighting.sh`, `run-rsc-lsp.sh`, `compute-classpath.sh`) in this repo
-are plain copies of the same content in
-[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger)
-(at `tools/intellij/rascal-textmate-bundle/`, `tools/intellij/docs/
-intellij_rascal_highlighting.md`, and `tools/intellij/{setup-intellij-
-rascal-highlighting.sh,run-rsc-lsp.sh,compute-classpath.sh}` there), kept
-at these paths on purpose (so none of their own path-resolution logic
-needs changes here). The LSP launcher script only works this way because
-it supports the `RASCAL_PROJECT_ROOT` override (see part 2 above) --
-don't mirror an older copy that predates that, it won't run standalone.
-Whenever any of these files change in `rascal-intellij-debugger` (a
-grammar fix, a classpath change, a new `RASCAL_PROJECT_ROOT`-style
-option), re-copy them here and push -- no version bump or release needed,
+`rascal-textmate-bundle/`, `docs/intellij_rascal_highlighting.md`,
+`setup-intellij-rascal-highlighting.sh`, `run-rsc-lsp.sh`, and
+`compute-classpath.sh` -- all at this repo's own root -- are copies of the
+same content in
+[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger),
+where they live nested under `tools/intellij/` instead (that repo also
+holds the plugin's own Java source and a sample project alongside them,
+so the nesting earns its keep there; this repo holds nothing else, so it
+doesn't). Because the nesting depth differs, each script's own fallback
+path-resolution (used when `RASCAL_PROJECT_ROOT` is unset) is one
+directory level shallower here than in the source repo -- already
+accounted for in the copies here; don't overwrite them with a raw copy of
+the source repo's own versions without reapplying that. Whenever any of
+these files change in `rascal-intellij-debugger` (a grammar fix, a
+classpath change, a new `RASCAL_PROJECT_ROOT`-style option), re-apply the
+same content change here and push -- no version bump or release needed,
 this isn't tied to the plugin's own versioning:
 
 ```bash
 # from a rascal-intellij-debugger checkout, SOURCE=/path/to/rascal-intellij-debugger
-cp -r "$SOURCE"/tools/intellij/rascal-textmate-bundle scripts/intellij-rascal-bundle
+cp -r "$SOURCE"/tools/intellij/rascal-textmate-bundle .
 cp "$SOURCE"/tools/intellij/docs/intellij_rascal_highlighting.md docs/
-cp "$SOURCE"/tools/intellij/{setup-intellij-rascal-highlighting.sh,run-rsc-lsp.sh,compute-classpath.sh} tools/intellij/
+cp "$SOURCE"/tools/intellij/setup-intellij-rascal-highlighting.sh .
+cp "$SOURCE"/tools/intellij/run-rsc-lsp.sh "$SOURCE"/tools/intellij/compute-classpath.sh .
+# then reapply the one-directory-shallower path fix noted above to the
+# three scripts just copied (see this repo's git history for the diff)
 git add -A && git commit -m "Sync highlighting/editing files from rascal-intellij-debugger" && git push origin main
 ```

@@ -27,7 +27,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 This covers the scripts directly in this directory
 (setup-intellij-rascal-highlighting.sh, run-rsc-lsp.sh,
-compute-classpath.sh). scripts/intellij-rascal-bundle/ (the
-syntax-highlighting grammar) is a derivative of a separate third-party
-project and is not covered by this license -- see
-docs/intellij_rascal_highlighting.md for its provenance.
+compute-classpath.sh). rascal-textmate-bundle/ (the syntax-highlighting
+grammar) is a derivative of a separate third-party project and is not
+covered by this license -- see docs/intellij_rascal_highlighting.md for
+its provenance.

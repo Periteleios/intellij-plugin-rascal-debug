@@ -34,9 +34,8 @@
 # kept happening via the other. See compute-classpath.sh's own comment
 # for the full story.
 #
-# This script itself is portable -- it can be run from a location other
-# than tools/intellij/ inside this checkout (e.g. hosted alongside the
-# rascal-debugger-plugin's own public releases repo) by setting
+# This script itself is portable -- it can be run from any location on
+# disk, pointed at any Maven-based Rascal project checkout, by setting
 # RASCAL_PROJECT_ROOT (in this Language Server's "Environment variables"
 # field in IntelliJ, not the Command field) to an absolute path to an
 # actual Maven-based Rascal project checkout. There's no way around
@@ -53,7 +52,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -n "${RASCAL_PROJECT_ROOT:-}" ]; then
   PROJECT_ROOT="$(cd "$RASCAL_PROJECT_ROOT" && pwd)"
 else
-  PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+  PROJECT_ROOT="$SCRIPT_DIR"
 fi
 PROJECT_CLASSES="$PROJECT_ROOT/target/classes"
 
