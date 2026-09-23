@@ -19,7 +19,7 @@ against whatever Maven-based Rascal project is currently open -- no
 scripts to run, no manual Language Server or Run/Debug configuration to
 set up.
 
-## Installing (one-time, per developer)
+## Installation
 
 Settings/Preferences > Plugins > gear icon (⚙) > **Manage Plugin
 Repositories...** > **+** > add:
