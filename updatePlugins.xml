@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.2/rascal-debugger-0.1.2.zip"
-          version="0.1.2">
+          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.3/rascal-debugger-0.1.3.zip"
+          version="0.1.3">
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>
     <description><![CDATA[
@@ -13,6 +13,14 @@
       <br/>
     ]]></description>
     <change-notes><![CDATA[
+      <b>0.1.3</b>
+      <ul>
+        <li>Fixed mvn resolution on macOS: 0.1.2's environment-map fix
+        wasn't sufficient on its own (a bare command name is resolved
+        against the launching IDE process's own PATH, not the child's
+        configured environment). Now pre-resolves the absolute path to
+        `mvn` instead.</li>
+      </ul>
       <b>0.1.2</b>
       <ul>
         <li>Fixed classpath computation (used by both the language
