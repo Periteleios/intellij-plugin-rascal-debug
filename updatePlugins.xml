@@ -13,6 +13,13 @@
       <br/>
     ]]></description>
     <change-notes><![CDATA[
+    <b>0.1.5</b>
+    <ul>
+      <li>Fixed the Rascal REPL launch command being silently truncated by
+      a PTY line-length limit on projects with large classpaths (missed
+      the debug port and language server entirely, with no error shown
+      anywhere) -- now passed via a Java argument file instead.</li>
+    </ul>
       <b>0.1.4</b>
       <ul>
         <li>Fixed the debug REPL and language server launching Rascal's
