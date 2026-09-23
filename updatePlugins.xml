@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/intellij-plugin-rascal-debug/releases/download/v0.6.0/rascal-debugger-0.6.0.zip"
+          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.6.0/rascal-debugger-0.6.0.zip"
           version="0.6.0">
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>

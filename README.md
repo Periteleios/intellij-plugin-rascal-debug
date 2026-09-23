@@ -80,7 +80,7 @@ Settings/Preferences > Plugins > gear icon (⚙) > **Manage Plugin
 Repositories...** > **+** > add:
 
 ```
-https://raw.githubusercontent.com/Periteleios/intellij-plugin-rascal-debug/main/updatePlugins.xml
+https://raw.githubusercontent.com/Periteleios/rascal-intellij-debugger-releases/main/updatePlugins.xml
 ```
 
 Apply, then find **Rascal Debugger** under Marketplace (it'll show up as
