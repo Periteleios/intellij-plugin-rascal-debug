@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugins>
   <plugin id="com.periteleios.rascal-terminal"
-          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.1/rascal-debugger-0.1.1.zip"
-          version="0.1.1">
+          url="https://github.com/Periteleios/rascal-intellij-debugger-releases/releases/download/v0.1.2/rascal-debugger-0.1.2.zip"
+          version="0.1.2">
     <idea-version since-build="242"/>
     <name>Rascal Debugger</name>
     <description><![CDATA[
@@ -13,6 +13,13 @@
       <br/>
     ]]></description>
     <change-notes><![CDATA[
+      <b>0.1.2</b>
+      <ul>
+        <li>Fixed classpath computation (used by both the language
+        server and the debug REPL launcher) failing to find `mvn` when
+        IntelliJ is launched as a GUI app on macOS, which inherits a
+        minimal PATH missing wherever Homebrew/SDKMAN installed Maven.</li>
+      </ul>
       <b>0.1.1</b>
       <ul>
         <li>Fixed the plugin's own build: it was silently compiled to
