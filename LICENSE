@@ -27,5 +27,5 @@ POSSIBILITY OF SUCH DAMAGE.
 
 This covers this repo's own content (`updatePlugins.xml`, this file, the
 README). The compiled plugin releases attached here are built from
-[rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger-development)'s
+[rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development)'s
 own source, licensed the same way -- see that repo's own LICENSE file.

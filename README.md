@@ -2,7 +2,7 @@
 
 This repo hosts **built releases only** -- just `updatePlugins.xml` and the
 release assets it points at. The plugin's source lives publicly in
-[Periteleios/rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger-development),
+[Periteleios/rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
 under `tools/intellij/rascal-debugger-plugin/` -- see that project's
 `tools/intellij/README.md` for what it does and how it's built, and for
 its own manual/advanced setup path if you want highlighting/editing
@@ -36,7 +36,7 @@ breakpoints/stepping should all just work.
 
 ## Cutting a new release (maintainers)
 
-1. In [rascal-intellij-debugger](https://github.com/Periteleios/rascal-intellij-debugger-development),
+1. In [rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
    bump `version` in
    `tools/intellij/rascal-debugger-plugin/build.gradle.kts`, then build:
    ```bash
