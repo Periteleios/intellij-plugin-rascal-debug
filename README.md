@@ -1,8 +1,7 @@
 # Rascal IntelliJ Debug Plugin -- releases
 
-This repo hosts **built releases only** -- just `updatePlugins.xml` and the
-release assets it points at. The plugin's source lives publicly in
-[Periteleios/rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
+This repo hosts **built releases only** <br>
+The plugin's source lives publicly in [Periteleios/rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
 
 
 ## Installation
