@@ -39,7 +39,7 @@ breakpoints/stepping should all just work.
 1. On GitHub, in *this* repo: **Releases > Draft a new release**.
    - Tag: `v<version>` (e.g. `v0.1.1`) -- must match exactly, the download
      URL below depends on it.
-   - Attach the zip from step 1 as a release asset -- drag it into the
+   - Attach the zip resulting from [your plugin build](https://github.com/Periteleios/rascal-intellij-debugger-development) a release asset -- drag it into the
      **"Attach binaries by dropping them here or selecting them"** box
      (below the description field), not into the description text itself.
      Dropping it into the description instead creates a `user-attachments`
