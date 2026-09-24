@@ -14,10 +14,9 @@ https://raw.githubusercontent.com/Periteleios/rascal-intellij-debugger-releases/
 ```
 
 Apply, then find **Rascal Debugger** under Marketplace (it'll show up as
-coming from this custom repository) and install it. Future updates pushed
-here will show up as normal plugin updates -- no manual reinstall needed.
+coming from this custom repository) and install it. <br>
 Open any `.rsc` file and syntax highlighting, diagnostics/CodeLenses, and
-breakpoints/stepping should all just work.
+breakpoints/stepping.
 
 
 # Quick start
