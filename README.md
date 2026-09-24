@@ -24,11 +24,7 @@ breakpoints/stepping.
 #### Prerequisite: 
 - project SDK of Java 11+ `File > Project Structure > Project > SDK`
 - build the project once so `target/classes` exists and the Maven jars are in your local `~/.m2`
-repository:
-
-    ```bash
-    ./build.sh
-    ```
+repository
 
 #### Install the plugin:
 - `Settings/Preferences > Plugins > gear icon (⚙) > Manage Plugin Repositories... > + >` <br>
