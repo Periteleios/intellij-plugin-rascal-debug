@@ -3,21 +3,7 @@
 This repo hosts **built releases only** -- just `updatePlugins.xml` and the
 release assets it points at. The plugin's source lives publicly in
 [Periteleios/rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
-under `tools/intellij/rascal-debugger-plugin/` -- see that project's
-`tools/intellij/README.md` for what it does and how it's built, and for
-its own manual/advanced setup path if you want highlighting/editing
-without installing the plugin at all.
 
-This repo exists because IntelliJ's custom plugin repository feature needs
-a static `updatePlugins.xml` + release assets to auto-update from, not a
-source checkout -- so releases are cut here even though the source is
-public.
-
-**Installing the plugin is all you need to do.** As of 0.1.0, it
-auto-configures syntax highlighting, editing, and debugging on its own,
-against whatever Maven-based Rascal project is currently open -- no
-scripts to run, no manual Language Server or Run/Debug configuration to
-set up.
 
 ## Installation
 
