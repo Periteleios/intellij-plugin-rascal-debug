@@ -36,16 +36,7 @@ breakpoints/stepping should all just work.
 
 ## Cutting a new release (maintainers)
 
-1. In [rascal-intellij-debugger-development](https://github.com/Periteleios/rascal-intellij-debugger-development),
-   bump `version` in
-   `tools/intellij/rascal-debugger-plugin/build.gradle.kts`, then build:
-   ```bash
-   cd tools/intellij/rascal-debugger-plugin
-   export JAVA_HOME=~/.jdks/openjdk-26.0.2.1   # needs JDK 25+ (platform 2026.2.2's own jars are class v69); output still targets 17
-   ./gradlew buildPlugin
-   ```
-   Output: `build/distributions/rascal-debugger-<version>.zip`.
-2. On GitHub, in *this* repo: **Releases > Draft a new release**.
+1. On GitHub, in *this* repo: **Releases > Draft a new release**.
    - Tag: `v<version>` (e.g. `v0.1.1`) -- must match exactly, the download
      URL below depends on it.
    - Attach the zip from step 1 as a release asset -- drag it into the
@@ -55,7 +46,7 @@ breakpoints/stepping should all just work.
      link, not a real release asset, and the download URL below won't
      resolve.
    - Publish.
-3. Update `updatePlugins.xml` in this repo: bump the `version` attribute and
+2. Update `updatePlugins.xml` in this repo: bump the `version` attribute and
    the `url` attribute (new tag + new filename), commit, push to `main`.
 
 That's it -- no separate "publish" step, `raw.githubusercontent.com` serves
